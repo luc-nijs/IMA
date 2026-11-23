@@ -3,6 +3,8 @@
 // Used at build time (for search engines and the picture copies) and in the
 // visitor's browser, which reads the sheet live.
 
+import { url } from './url.js';
+
 // "File > Share > Publish to web > CSV" address. Empty = use the starter file below.
 export const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS5ExdIY9nSHVSIN1mSv7xZCTkwy9knpgsw2OaQV-43HOgm8pguEP8MLaYQw79kUKIT5kjqF-ul8pPl/pub?output=csv';
 
@@ -74,13 +76,16 @@ const untilOrEmpty = (s) => isoDate(s);
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 export const longDate = (iso) => (iso ? `${+iso.slice(8)} ${MONTHS[+iso.slice(5, 7) - 1]} ${iso.slice(0, 4)}` : '');
 
+// Site paths in the sheet ("/images/…", "/research") get the base path; full addresses stay as they are.
+const local = (s) => (/^\/(?!\/)/.test(s) ? url(s) : s);
+
 const textHtml = (s) => esc(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
 
 function pictureHtml(link) {
   if (!link) return '<span class="news-pic none" aria-hidden="true"></span>';
   const id = driveId(link);
-  if (!id) return `<img class="news-pic" src="${esc(link)}" alt="" loading="lazy">`;
-  return `<img class="news-pic" src="/news-pictures/${id}.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" ` +
+  if (!id) return `<img class="news-pic" src="${esc(local(link))}" alt="" loading="lazy">`;
+  return `<img class="news-pic" src="${url('/news-pictures/')}${id}.jpg" alt="" loading="lazy" referrerpolicy="no-referrer" ` +
     `onerror="this.onerror=null;this.src='${driveImageUrl(id)}'">`;
 }
 
@@ -91,7 +96,7 @@ export function newsHtml(recs, limit = 0) {
   return list.map((r) => {
     const ext = /^https?:/i.test(r.link || '');
     const tag = r.link ? 'a' : 'article';
-    const href = r.link ? ` href="${esc(r.link)}"${ext ? ' target="_blank" rel="noopener"' : ''}` : '';
+    const href = r.link ? ` href="${esc(local(r.link))}"${ext ? ' target="_blank" rel="noopener"' : ''}` : '';
     const meta = [r.category, longDate(r.date)].filter(Boolean).map(esc).join(' · ');
     return `<${tag} class="news-card"${href}>${pictureHtml(r.picture)}<div>` +
       (meta ? `<p class="meta">${meta}</p>` : '') +

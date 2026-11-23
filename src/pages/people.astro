@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { people, initials } from '../data/people.js';
+import { url } from '../lib/url.js';
 const groups = [...new Set(people.map((p) => p.group))];
 ---
 <Base title="People" path="/people" description="The people of the Institute of Musicology and Arts at the University of Luxembourg.">
@@ -13,7 +14,7 @@ const groups = [...new Set(people.map((p) => p.group))];
           <div class="people">
             {people.filter((p) => p.group === g).map((p) => (
               <a class="person" href={p.page}>
-                <span class="photo">{p.photo ? <img src={p.photo} alt={`Portrait of ${p.name}`} width="480" height="320" loading="lazy" /> : initials(p.name)}</span>
+                <span class="photo">{p.photo ? <img src={url(p.photo)} alt={`Portrait of ${p.name}`} width="480" height="320" loading="lazy" /> : initials(p.name)}</span>
                 <span class="txt"><b>{p.name}</b><span>{p.role}</span><span class="go">Profile on uni.lu ↗</span></span>
               </a>
             ))}

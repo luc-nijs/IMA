@@ -21,6 +21,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      SITE_BASE: /IMA
     steps:
       - uses: actions/checkout@v7
       - uses: withastro/action@v6

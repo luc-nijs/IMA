@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
+import { url } from '../lib/url.js';
 ---
 <Base title="Page not found" path="/404" noindex>
-  <header class="page-head"><div class="wrap"><p class="eyebrow">404</p><h1>Page not <em>found</em></h1><p class="lead">This page does not exist (any more).</p><p style="margin-top:28px"><a class="btn" href="/">To the home page <span>→</span></a></p></div></header>
+  <header class="page-head"><div class="wrap"><p class="eyebrow">404</p><h1>Page not <em>found</em></h1><p class="lead">This page does not exist (any more).</p><p style="margin-top:28px"><a class="btn" href={url('/')}>To the home page <span>→</span></a></p></div></header>
 </Base>

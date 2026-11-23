@@ -5,6 +5,7 @@ import { projects, funded, other } from '../data/projects.js';
 import { people } from '../data/people.js';
 import { loadNews } from '../lib/loadNews.js';
 import { newsHtml } from '../lib/news.js';
+import { url } from '../lib/url.js';
 import { loadPublications } from '../lib/loadPublications.js';
 
 const news = await loadNews();
@@ -17,11 +18,11 @@ const publications = (await loadPublications()).length;
         <p class="eyebrow">University of Luxembourg · FHSE</p>
         <h1>Research on <em>music</em> education &amp; performance</h1>
         <p class="quote">“<i>Music and Art are the guiding lights of the world.</i>” — Picasso<br />A young, ambitious institute advancing music education research, from Luxembourg to the world.</p>
-        <div class="ctas"><a class="btn" href="/research">Explore our research <span>→</span></a><a class="btn ghost" href="/people">Meet the people</a></div>
+        <div class="ctas"><a class="btn" href={url('/research')}>Explore our research <span>→</span></a><a class="btn ghost" href={url('/people')}>Meet the people</a></div>
       </div>
       <div class="visual" aria-hidden="true">
         <div class="q c"></div>
-        <div class="q a"><img src="/images/research.jpg" alt="" width="1050" height="1400" fetchpriority="high" /></div>
+        <div class="q a"><img src={url('/images/research.jpg')} alt="" width="1050" height="1400" fetchpriority="high" /></div>
         <div class="q b"></div>
         <div class="tag-float"><b>In the lab</b>Clarinet + EEG, SAMuSe</div>
       </div>
@@ -39,14 +40,14 @@ const publications = (await loadPublications()).length;
 
   <section id="news">
     <div class="wrap">
-      <div class="head reveal"><h2>News</h2><a class="link" href="/news">All news</a></div>
+      <div class="head reveal"><h2>News</h2><a class="link" href={url('/news')}>All news</a></div>
       <div class="home-news reveal">
         <div class="news-grid" id="home-news" set:html={newsHtml(news, 1)}></div>
         <article class="tribute">
           <p class="meta">Tribute</p>
           <h3>Prof. Damien Sagrillo</h3>
           <p>Since the Institute’s creation in 2021, his vision, leadership and scholarship shaped a strong research profile devoted to Luxembourg’s musical heritage. His legacy continues to shape our work today.</p>
-          <p style="margin-top:14px"><a href="/about">Read more on the About page</a></p>
+          <p style="margin-top:14px"><a href={url('/about')}>Read more on the About page</a></p>
         </article>
       </div>
     </div>
@@ -54,13 +55,13 @@ const publications = (await loadPublications()).length;
 
   <section id="projects" style="padding-top:0">
     <div class="wrap">
-      <div class="head reveal"><h2>Funded projects</h2><a class="link" href="/research#projects">All projects</a></div>
+      <div class="head reveal"><h2>Funded projects</h2><a class="link" href={url('/research#projects')}>All projects</a></div>
       <div class="projects reveal">
         {funded.map((p) => (
-          <a class="proj" href={`/research#${p.name.toLowerCase()}`}><small>{p.tag}</small><b>{p.name}</b><p>{p.short}</p><span class="go" aria-hidden="true">→</span></a>
+          <a class="proj" href={url(`/research#${p.name.toLowerCase()}`)}><small>{p.tag}</small><b>{p.name}</b><p>{p.short}</p><span class="go" aria-hidden="true">→</span></a>
         ))}
-        <a class="proj all" href="/research#other"><small>Within the institute</small><b>Other projects</b><p>{other.map((p) => p.name).join(', ')}</p><span class="go" aria-hidden="true">→</span></a>
-        <a class="proj all" href="/research#previous"><small>Archive</small><b>Previous projects</b><p>Menager edition, Luxemburger Musikerlexikon</p><span class="go" aria-hidden="true">→</span></a>
+        <a class="proj all" href={url('/research#other')}><small>Within the institute</small><b>Other projects</b><p>{other.map((p) => p.name).join(', ')}</p><span class="go" aria-hidden="true">→</span></a>
+        <a class="proj all" href={url('/research#previous')}><small>Archive</small><b>Previous projects</b><p>Menager edition, Luxemburger Musikerlexikon</p><span class="go" aria-hidden="true">→</span></a>
       </div>
     </div>
   </section>

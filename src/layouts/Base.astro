@@ -2,6 +2,7 @@
 import '../styles/site.css';
 import Logo from './Logo.astro';
 import { nav, more } from '../data/nav.js';
+import { url } from '../lib/url.js';
 
 interface Props { title: string; description?: string; path: string; noindex?: boolean }
 const { title, description = 'The Institute of Musicology and Arts (IMA) at the University of Luxembourg conducts research on music education, music performance and musicology: embodied music pedagogy, musical creativity, music technology and well-being through music.', path, noindex = false } = Astro.props;
@@ -17,7 +18,7 @@ const fullTitle = path === '/' ? 'IMA | Institute of Musicology and Arts' : `${t
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     {noindex ? <meta name="robots" content="noindex" /> : canonical && <link rel="canonical" href={canonical} />}
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href={url('/favicon.svg')} type="image/svg+xml" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="IMA, University of Luxembourg" />
     <meta property="og:title" content={fullTitle} />
@@ -37,14 +38,14 @@ const fullTitle = path === '/' ? 'IMA | Institute of Musicology and Arts' : `${t
     <a class="skip" href="#main">Skip to content</a>
     <header class="site-header">
       <div class="wrap bar">
-        <a class="brand" href="/">
+        <a class="brand" href={url('/')}>
           <Logo />
           <span class="div"></span>
           <span><b>IMA</b><small>Institute of Musicology and Arts</small></span>
         </a>
         <nav class="menu" id="menu" aria-label="Site">
           <ul>
-            {nav.map((item) => <li><a href={item.href} aria-current={item.href === path ? 'page' : undefined}>{item.label}</a></li>)}
+            {nav.map((item) => <li><a href={url(item.href)} aria-current={item.href === path ? 'page' : undefined}>{item.label}</a></li>)}
           </ul>
         </nav>
         <button class="icon-btn menu-toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
@@ -65,7 +66,7 @@ const fullTitle = path === '/' ? 'IMA | Institute of Musicology and Arts' : `${t
           </div>
           <div>
             <h3>Institute</h3>
-            <ul>{[...nav.slice(1), ...more].map((item) => <li><a href={item.href}>{item.label}</a></li>)}</ul>
+            <ul>{[...nav.slice(1), ...more].map((item) => <li><a href={url(item.href)}>{item.label}</a></li>)}</ul>
           </div>
           <div>
             <h3>University</h3>
