@@ -1,0 +1,85 @@
+---
+import Base from '../layouts/Base.astro';
+import { projects, previous } from '../data/projects.js';
+const months = (m) => (m % 12 === 0 ? `${m / 12} years` : `${m} months`);
+const topics = [
+  ['Embodied music pedagogy', 'The role of the body and movement in teaching and learning music.'],
+  ['Early childhood music education', 'How young children learn music, and learn to play an instrument.'],
+  ['Musical creativity', 'How creativity develops and can be fostered in music learning.'],
+  ['Music technology in education', 'Interactive technologies and augmented reality for the music classroom.'],
+  ['Musician and instrument', 'How musicians interact with their instrument, and how skill develops.'],
+  ['Well-being through music', 'Music as a resource for well-being, resilience and inclusion.'],
+];
+---
+<Base title="Research" path="/research" description="Research at the Institute of Musicology and Arts: embodied music pedagogy, early childhood music education, musical creativity, music technology, musician-instrument interaction and well-being through music.">
+  <header class="page-head"><div class="wrap"><p class="eyebrow">Research</p><h1>Music education &amp; <em>performance</em></h1><p class="lead">IMA conducts research at the intersection of music education, music performance and musicology. Through funded projects and international collaborations, we contribute to music research and to the future of music learning and performance.</p></div></header>
+
+  <section>
+    <div class="wrap">
+      <div class="head reveal"><h2>Research topics</h2></div>
+      <div class="topics">
+        {topics.map(([t, d], i) => <article class="topic reveal"><span class="n">{String(i + 1).padStart(2, '0')}</span><h3>{t}</h3><p>{d}</p></article>)}
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" style="padding-top:0">
+    <div class="wrap">
+      <div class="head reveal"><h2>Ongoing projects</h2><p>Funded research projects, from multi-sensing studies of performance to workshops for music teachers and youth workers.</p></div>
+      <div class="plist">
+      {projects.map((p) => (
+        <article class="pitem reveal" id={p.name.toLowerCase()}>
+          <div>
+            <p class="meta">{p.tag}</p>
+            <h3>{p.name}</h3>
+            <dl>
+              <dt>Start</dt><dd>{p.start}</dd>
+              <dt>Duration</dt><dd>{months(p.months)}</dd>
+              <dt>Funding</dt><dd>{p.funding}</dd>
+            </dl>
+          </div>
+          <div>
+            <h4>{p.title}</h4>
+            <p class="about">{p.about}</p>
+            <p class="links">
+              {p.site && <a class="link" href={p.site}>Project website ↗</a>}
+              <a class="link" href={p.unilu}>On uni.lu ↗</a>
+            </p>
+          </div>
+        </article>
+      ))}
+    </div>
+    </div>
+  </section>
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="prose reveal">
+        <h2>Doctoral research</h2>
+        <p style="margin-top:20px">The topics of completed and ongoing doctoral theses are related to the research of the Institute. They include music philology (publishing), music education and performance, and wind music from a sociological and historical point of view.</p>
+        <p>Previous research of the Institute valorised Luxembourg’s musical heritage, with the critical edition of the works of Laurent Menager and the <i>Luxemburger Musikerlexikon</i>. <a href="#previous">See previous projects</a>.</p>
+      </div>
+    </div>
+  </section>
+  <section id="previous" style="padding-top:0">
+    <div class="wrap">
+      <div class="head reveal"><h2>Previous projects</h2><p>Research on Luxembourg’s musical heritage, led by Prof. Damien Sagrillo.</p></div>
+      <div class="plist">
+        {previous.map((p) => (
+          <article class="pitem old reveal">
+            <div>
+              <p class="meta">Musical heritage</p>
+              <h3>{p.name}</h3>
+              <dl><dt>Start</dt><dd>{p.start}</dd><dt>Duration</dt><dd>{months(p.months)}</dd><dt>Funding</dt><dd>{p.funding}</dd></dl>
+            </div>
+            <div>
+              <h4>{p.title}</h4>
+              <p class="about">{p.about}</p>
+              <p class="about" style="font-size:15px;color:var(--muted)">Team: {p.team}</p>
+              <p class="links"><a class="link" href={p.link}>More ↗</a></p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import LiveNews from '../layouts/LiveNews.astro';
+import { loadNews } from '../lib/loadNews.js';
+import { newsHtml } from '../lib/news.js';
+const news = await loadNews();
+---
+<Base title="News" path="/news" description="News from the Institute of Musicology and Arts at the University of Luxembourg: conferences, publications, events and projects.">
+  <header class="page-head"><div class="wrap"><p class="eyebrow">Institute of Musicology and Arts</p><h1>News</h1><p class="lead">Conferences, publications, events and what happens in our projects.</p></div></header>
+  <section class="news-page">
+    <div class="wrap news-grid" id="all-news" set:html={newsHtml(news) || '<p>No news at the moment.</p>'}></div>
+  </section>
+  <LiveNews target="all-news" />
+</Base>

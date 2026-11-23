@@ -1,0 +1,16 @@
+---
+// Re-reads the news sheet in the visitor's browser, so a new row shows without waiting for the nightly build.
+const { target, limit = 0 } = Astro.props;
+---
+<script is:inline define:vars={{ target, limit }}>window.__imaNews = { target, limit };</script>
+<script>
+  import { SHEET_CSV_URL, recordsFromCSV, current, newsHtml } from '../lib/news.js';
+  const cfg = (window as any).__imaNews;
+  if (SHEET_CSV_URL && cfg) {
+    fetch(SHEET_CSV_URL + '&v=' + Math.floor(Date.now() / 60000), { cache: 'no-cache' }).then((r) => (r.ok ? r.text() : Promise.reject(r.status))).then((text) => {
+      const html = newsHtml(current(recordsFromCSV(text)), cfg.limit);
+      const el = document.getElementById(cfg.target);
+      if (el && html && el.innerHTML !== html) el.innerHTML = html;
+    }).catch(() => {});
+  }
+</script>

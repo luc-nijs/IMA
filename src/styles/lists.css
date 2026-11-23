@@ -1,0 +1,58 @@
+/* Publications and lectures: the lucnijs.be list + map system, in IMA colours (light and dark). */
+.pb-app, #lecture-map-app { display: flex; flex-direction: column; }
+.lm-controls, .pb-controls { display: flex; flex-wrap: wrap; gap: .6rem 1.1rem; align-items: center; margin-bottom: 14px; font-size: 15px; }
+.lm-controls label, .pb-controls label { font: 600 14px/1 var(--cond); text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-right: 6px; }
+.lm-controls select, .pb-controls select, .lm-controls input, .pb-controls input {
+  font: inherit; color: var(--ink); background: var(--card); padding: 7px 10px; border: 1px solid var(--line); border-bottom: 2px solid var(--ink); border-radius: 0;
+}
+.lm-count, .pb-count { margin-left: auto; color: var(--muted); }
+.lm-status, .pb-status { padding-top: 8px; font-size: 14px; color: var(--muted); }
+.lm-status.lm-error { color: var(--red); }
+
+/* publications */
+.pb-group, .lm-year { position: sticky; top: 0; z-index: 2; background: var(--bg); font: 700 24px/1 var(--cond); text-transform: uppercase; padding: 18px 0 8px; border-bottom: 2px solid var(--ink); margin-bottom: 6px; }
+.pb-group span, .lm-year span { font: 500 14px/1 var(--sans); text-transform: none; color: var(--muted); margin-left: 6px; }
+.pb-item { padding: 10px 12px; border-left: 3px solid transparent; line-height: 1.5; font-size: 16px; }
+.pb-item:hover { background: var(--soft); border-left-color: var(--red); }
+.pb-t { font-weight: 500; }
+.pb-v { color: var(--muted); font-style: italic; }
+.pb-item a { color: var(--red); text-decoration: none; } .pb-item a:hover { text-decoration: underline; }
+.pb-doi { font-size: 14px; }
+.pb-badge { display: inline-block; font: 600 12px/1 var(--cond); text-transform: uppercase; letter-spacing: .08em; padding: 3px 6px; margin-left: 6px; background: var(--peach-1); color: var(--ink); border: 1px solid var(--line); vertical-align: 1px; }
+
+/* lectures: map beside list */
+#lecture-map-app { height: max(560px, calc(100vh - 160px)); }
+.lm-split { flex: 1 1 auto; min-height: 0; display: flex; gap: 16px; }
+#lecture-map { flex: 1 1 58%; min-width: 0; border: 1px solid var(--line); background: var(--soft); }
+#lm-list-pane { flex: 1 1 42%; min-width: 0; overflow-y: auto; padding-right: 4px; }
+.lm-year { font-size: 22px; padding-top: 12px; }
+.lm-item { padding: 9px 10px; cursor: pointer; font-size: 15px; line-height: 1.4; border-left: 3px solid transparent; }
+.lm-item:hover { background: var(--soft); }
+.lm-item.lm-on { background: var(--peach-1); border-left-color: var(--red); }
+.lm-item .lm-m { color: var(--muted); font-size: 13.5px; }
+.lm-item a { color: var(--red); text-decoration: none; }
+.lm-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; }
+.lm-online { color: var(--muted); vertical-align: -1px; }
+.lm-pop { font: 14px/1.45 var(--sans); max-width: 16rem; }
+.lm-pop h4 { font: 700 18px/1.1 var(--cond); text-transform: uppercase; margin: 0 0 2px; }
+.lm-pop .lm-place { color: #61717d; }
+.lm-pop ul { margin: 6px 0 0; padding-left: 16px; }
+.lm-pop li { margin-bottom: 5px; }
+.lm-legend { background: var(--card); color: var(--ink); padding: 6px 9px; font: 13px/1.6 var(--sans); box-shadow: var(--shadow); }
+.lm-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+#lecture-map, #lecture-map * { box-sizing: content-box; }
+#lecture-map { isolation: isolate; }
+.marker-cluster, .marker-cluster div { background: rgba(200,42,29,.35) !important; color: #1e3446; font-weight: 700; }
+@media (max-width: 760px) { #lecture-map-app { height: 640px; } .lm-split { flex-direction: column; } #lecture-map { flex: 0 0 220px; } #lm-list-pane { flex: 1 1 auto; } .lm-count, .pb-count { margin-left: 0; width: 100%; } }
+
+/* dark map */
+:root[data-theme="dark"] .leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) grayscale(.5) brightness(.8) contrast(.9); }
+:root[data-theme="dark"] .leaflet-popup-content-wrapper, :root[data-theme="dark"] .leaflet-popup-tip { background: #172938; color: #eef2f5; }
+:root[data-theme="dark"] .leaflet-bar a { background: #172938; color: #eef2f5; border-color: #243a4c; }
+:root[data-theme="dark"] .leaflet-container .leaflet-control-attribution { background: rgba(14,26,37,.8); color: #a3b0ba; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) grayscale(.5) brightness(.8) contrast(.9); }
+  :root:not([data-theme="light"]) .leaflet-popup-content-wrapper, :root:not([data-theme="light"]) .leaflet-popup-tip { background: #172938; color: #eef2f5; }
+  :root:not([data-theme="light"]) .leaflet-bar a { background: #172938; color: #eef2f5; border-color: #243a4c; }
+  :root:not([data-theme="light"]) .leaflet-container .leaflet-control-attribution { background: rgba(14,26,37,.8); color: #a3b0ba; }
+}
