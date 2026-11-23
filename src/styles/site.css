@@ -158,6 +158,9 @@ a.news-card:hover { transform: translateY(-4px); }
 .pitem.old { border-left-color: var(--peach); }
 @media (max-width: 760px) { .pitem { grid-template-columns: 1fr; gap: 10px; padding: 26px 22px; } }
 
+.pgroup + .pgroup { margin-top: 80px; }
+.pgroup { scroll-margin-top: 90px; }
+
 /* topics (research page) */
 .topics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 .topic { position: relative; overflow: hidden; padding: 34px 30px 40px; background: var(--soft); min-height: 220px; }
@@ -173,12 +176,15 @@ a.news-card:hover { transform: translateY(-4px); }
 .people-group + .people-group { margin-top: 50px; }
 .people-group h2 { font-size: 30px; margin-bottom: 20px; }
 .people { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-.person { display: flex; gap: 20px; align-items: center; padding: 22px; background: var(--card); border: 1px solid var(--line); text-decoration: none; transition: border-color .2s, transform .2s; }
+.person { display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--line); text-decoration: none; transition: border-color .2s, transform .2s; overflow: hidden; }
 .person:hover { border-color: var(--red); transform: translateY(-3px); }
-.avatar { width: 88px; height: 88px; flex: none; border-top-left-radius: 100%; background: var(--peach); color: #1e3446; display: grid; place-items: center; font: 700 30px/1 var(--cond); overflow: hidden; }
-.avatar img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; }
-.person b { display: block; font: 700 24px/1.05 var(--cond); text-transform: uppercase; }
-.person span { color: var(--muted); font-size: 15px; line-height: 1.35; display: block; margin-top: 4px; }
+.person .photo { aspect-ratio: 3 / 2; background: var(--peach); border-bottom-right-radius: 38%; overflow: hidden; color: #1e3446; display: grid; place-items: center; font: 700 44px/1 var(--cond); }
+.person .photo img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+.person:hover .photo img { transform: scale(1.04); }
+.person .txt { padding: 18px 22px 22px; }
+.person b { display: block; font: 700 26px/1.05 var(--cond); text-transform: uppercase; }
+.person .txt span { color: var(--muted); font-size: 15px; line-height: 1.35; display: block; margin-top: 6px; }
+.person .txt .go { color: var(--red); font: 600 14px/1 var(--cond); text-transform: uppercase; letter-spacing: .08em; margin-top: 14px; }
 @media (max-width: 980px) { .people { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 600px) { .people { grid-template-columns: 1fr; } }
 

@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import LiveNews from '../layouts/LiveNews.astro';
-import { projects } from '../data/projects.js';
+import { projects, funded, other } from '../data/projects.js';
 import { people } from '../data/people.js';
 import { loadNews } from '../lib/loadNews.js';
 import { newsHtml } from '../lib/news.js';
@@ -52,11 +52,12 @@ const news = await loadNews();
 
   <section id="projects" style="padding-top:0">
     <div class="wrap">
-      <div class="head reveal"><h2>Ongoing projects</h2><a class="link" href="/research#projects">All projects</a></div>
+      <div class="head reveal"><h2>Funded projects</h2><a class="link" href="/research#projects">All projects</a></div>
       <div class="projects reveal">
-        {projects.map((p) => (
+        {funded.map((p) => (
           <a class="proj" href={`/research#${p.name.toLowerCase()}`}><small>{p.tag}</small><b>{p.name}</b><p>{p.short}</p><span class="go" aria-hidden="true">→</span></a>
         ))}
+        <a class="proj all" href="/research#other"><small>Within the institute</small><b>Other projects</b><p>{other.map((p) => p.name).join(', ')}</p><span class="go" aria-hidden="true">→</span></a>
         <a class="proj all" href="/research#previous"><small>Archive</small><b>Previous projects</b><p>Menager edition, Luxemburger Musikerlexikon</p><span class="go" aria-hidden="true">→</span></a>
       </div>
     </div>

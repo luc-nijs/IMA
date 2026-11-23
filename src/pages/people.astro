@@ -13,8 +13,8 @@ const groups = [...new Set(people.map((p) => p.group))];
           <div class="people">
             {people.filter((p) => p.group === g).map((p) => (
               <a class="person" href={p.page}>
-                <span class="avatar">{p.photo ? <img src={p.photo} alt="" width="266" height="400" loading="lazy" /> : initials(p.name)}</span>
-                <span><b>{p.name}</b><span>{p.role}</span></span>
+                <span class="photo">{p.photo ? <img src={p.photo} alt={`Portrait of ${p.name}`} width="480" height="320" loading="lazy" /> : initials(p.name)}</span>
+                <span class="txt"><b>{p.name}</b><span>{p.role}</span><span class="go">Profile on uni.lu ↗</span></span>
               </a>
             ))}
           </div>

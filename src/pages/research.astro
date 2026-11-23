@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { projects, previous } from '../data/projects.js';
+import { funded, other, previous } from '../data/projects.js';
 const months = (m) => (m % 12 === 0 ? `${m / 12} years` : `${m} months`);
 const topics = [
   ['Embodied music pedagogy', 'The role of the body and movement in teaching and learning music.'],
@@ -25,32 +25,44 @@ const topics = [
 
   <section id="projects" style="padding-top:0">
     <div class="wrap">
-      <div class="head reveal"><h2>Ongoing projects</h2><p>Funded research projects, from multi-sensing studies of performance to workshops for music teachers and youth workers.</p></div>
-      <div class="plist">
-      {projects.map((p) => (
-        <article class="pitem reveal" id={p.name.toLowerCase()}>
-          <div>
-            <p class="meta">{p.tag}</p>
-            <h3>{p.name}</h3>
-            <dl>
-              <dt>Start</dt><dd>{p.start}</dd>
-              <dt>Duration</dt><dd>{months(p.months)}</dd>
-              <dt>Funding</dt><dd>{p.funding}</dd>
-            </dl>
+      {[
+        { id: 'funded', title: 'Funded projects', intro: 'Externally funded research projects, from multi-sensing studies of performance to workshops for music teachers and youth workers.', list: funded },
+        { id: 'other', title: 'Other projects', intro: 'Research carried out within the institute.', list: other },
+      ].map((g) => (
+        <div id={g.id} class="pgroup">
+          <div class="head reveal"><h2>{g.title}</h2><p>{g.intro}</p></div>
+          <div class="plist">
+            {g.list.map((p) => (
+              <article class="pitem reveal" id={p.name.toLowerCase()}>
+                <div>
+                  <p class="meta">{p.tag}</p>
+                  <h3>{p.name}</h3>
+                  {(p.start || p.funding) && (
+                    <dl>
+                      {p.start && <><dt>Start</dt><dd>{p.start}</dd></>}
+                      {p.months && <><dt>Duration</dt><dd>{months(p.months)}</dd></>}
+                      {p.funding && <><dt>Funding</dt><dd>{p.funding}</dd></>}
+                    </dl>
+                  )}
+                </div>
+                <div>
+                  <h4>{p.title}</h4>
+                  <p class="about">{p.about}</p>
+                  {(p.site || p.unilu) && (
+                    <p class="links">
+                      {p.site && <a class="link" href={p.site}>Project website ↗</a>}
+                      {p.unilu && <a class="link" href={p.unilu}>On uni.lu ↗</a>}
+                    </p>
+                  )}
+                </div>
+              </article>
+            ))}
           </div>
-          <div>
-            <h4>{p.title}</h4>
-            <p class="about">{p.about}</p>
-            <p class="links">
-              {p.site && <a class="link" href={p.site}>Project website ↗</a>}
-              <a class="link" href={p.unilu}>On uni.lu ↗</a>
-            </p>
-          </div>
-        </article>
+        </div>
       ))}
     </div>
-    </div>
   </section>
+
   <section style="padding-top:0">
     <div class="wrap">
       <div class="prose reveal">
