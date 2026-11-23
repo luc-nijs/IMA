@@ -2,7 +2,7 @@
 // browser (to read the sheet live and to filter), so both show the same list.
 
 // IMA_publications sheet: "File > Share > Publish to web > CSV" address. Empty = the saved copy only.
-export const SHEET_CSV_URL = '';
+export const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTGz3L0jtetwPxVaNBqngbRFR_qWE42RXAKTx1XKURmdEwnc-0fQ8Rb8ZwkpdTKKCptdgPN8h1hZ_l0/pub?output=csv';
 
 // Role groups in the order they should appear; anything unrecognised
 // falls to the end under its own raw label.

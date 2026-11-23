@@ -2,7 +2,7 @@
 // (to read the sheet live, filter and draw the map), so both show the same list.
 
 // IMA_lectures sheet: "File > Share > Publish to web > CSV" address. Empty = the saved copy only.
-export const SHEET_CSV_URL = '';
+export const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRxQ1hzS4z-rwler3pNh76AgLbcKPjbin6PqjlL4oXPD7y1sLffTx1T1nPFa4aTxkq3_yavgRR_RLB7/pub?output=csv';
 
 export const CONFIG = {
   colors: {
