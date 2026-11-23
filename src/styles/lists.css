@@ -30,7 +30,10 @@
 .lm-item:hover { background: var(--soft); }
 .lm-item.lm-on { background: var(--peach-1); border-left-color: var(--red); }
 .lm-item .lm-m { color: var(--muted); font-size: 13.5px; }
-.lm-item a { color: var(--red); text-decoration: none; }
+/* a linked title keeps the text colour; the arrow shows it opens a page */
+#lecture-map-app .lm-item a, #lecture-map-app .lm-pop a { color: inherit; text-decoration: none; }
+#lecture-map-app .lm-item a::after, #lecture-map-app .lm-pop a::after { content: ' ↗'; color: var(--red); font-size: .85em; }
+#lecture-map-app .lm-item a:hover, #lecture-map-app .lm-pop a:hover { text-decoration: underline; text-decoration-color: var(--red); }
 .lm-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; }
 .lm-online { color: var(--muted); vertical-align: -1px; }
 .lm-pop { font: 14px/1.45 var(--sans); max-width: 16rem; }
@@ -42,7 +45,9 @@
 .lm-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
 #lecture-map, #lecture-map * { box-sizing: content-box; }
 #lecture-map { isolation: isolate; }
-.marker-cluster, .marker-cluster div { background: rgba(200,42,29,.35) !important; color: #1e3446; font-weight: 700; }
+/* groups of nearby lectures: neutral grey, so they are not mistaken for a lecture type */
+.marker-cluster { background: rgba(232,234,236,.45) !important; }
+.marker-cluster div { background: #e8eaec !important; color: #1e3446; font-weight: 700; }
 @media (max-width: 760px) { #lecture-map-app { height: 640px; } .lm-split { flex-direction: column; } #lecture-map { flex: 0 0 220px; } #lm-list-pane { flex: 1 1 auto; } .lm-count, .pb-count { margin-left: 0; width: 100%; } }
 
 /* dark map */
