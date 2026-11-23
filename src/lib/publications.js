@@ -14,8 +14,8 @@ export const ROLE_LABEL = {
   thesis: 'Theses',
   other: 'Other',
 };
-export const TYPE_ORDER = ['journal article', 'book', 'book chapter', 'conference paper',
-  'editorial', 'professional article', 'report', 'thesis'];
+export const TYPE_ORDER = ['journal article', 'book', 'book chapter', 'music edition', 'conference paper',
+  'editorial', 'professional article', 'book review', 'report', 'thesis'];
 export const TYPE_LABEL = {
   'journal article': 'Journal articles',
   book: 'Books',
@@ -23,6 +23,8 @@ export const TYPE_LABEL = {
   'conference paper': 'Conference papers',
   editorial: 'Editorials',
   'professional article': 'Professional and practitioner articles',
+  'music edition': 'Music editions',
+  'book review': 'Book reviews',
   report: 'Reports',
   thesis: 'Theses',
 };
