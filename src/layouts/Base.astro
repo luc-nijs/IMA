@@ -1,14 +1,13 @@
 ---
 import '../styles/site.css';
-import Logo from './Logo.astro';
 import { nav, more } from '../data/nav.js';
 import { url } from '../lib/url.js';
 
 interface Props { title: string; description?: string; path: string; noindex?: boolean }
-const { title, description = 'The Institute of Musicology and Arts (IMA) at the University of Luxembourg conducts research on music education, music performance and musicology: embodied music pedagogy, musical creativity, music technology and well-being through music.', path, noindex = false } = Astro.props;
+const { title, description = 'IMA conducts research on music education, music performance and musicology: embodied music pedagogy, musical creativity, music technology and well-being through music.', path, noindex = false } = Astro.props;
 const site = Astro.site;
 const canonical = site ? new URL(path === '/' ? '/' : `${path}/`, site).href : '';
-const fullTitle = path === '/' ? 'IMA | Institute of Musicology and Arts' : `${title} | IMA`;
+const fullTitle = path === '/' ? 'IMA' : `${title} | IMA`;
 ---
 <!doctype html>
 <html lang="en">
@@ -20,7 +19,7 @@ const fullTitle = path === '/' ? 'IMA | Institute of Musicology and Arts' : `${t
     {noindex ? <meta name="robots" content="noindex" /> : canonical && <link rel="canonical" href={canonical} />}
     <link rel="icon" href={url('/favicon.svg')} type="image/svg+xml" />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="IMA, University of Luxembourg" />
+    <meta property="og:site_name" content="IMA" />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     {site && <meta property="og:image" content={new URL('/images/research.jpg', site).href} />}
@@ -39,9 +38,7 @@ const fullTitle = path === '/' ? 'IMA | Institute of Musicology and Arts' : `${t
     <header class="site-header">
       <div class="wrap bar">
         <a class="brand" href={url('/')}>
-          <Logo />
-          <span class="div"></span>
-          <span><b>IMA</b><small>Institute of Musicology and Arts</small></span>
+          <span><b>IMA</b></span>
         </a>
         <nav class="menu" id="menu" aria-label="Site">
           <ul>
@@ -61,24 +58,11 @@ const fullTitle = path === '/' ? 'IMA | Institute of Musicology and Arts' : `${t
       <div class="wrap">
         <div class="top">
           <div>
-            <Logo />
-            <p>Institute of Musicology and Arts<br />Department of Education and Social Work<br />Faculty of Humanities, Education and Social Sciences (FHSE)</p>
-          </div>
-          <div>
-            <h3>Institute</h3>
+            <h3>Explore</h3>
             <ul>{[...nav.slice(1), ...more].map((item) => <li><a href={url(item.href)}>{item.label}</a></li>)}</ul>
           </div>
-          <div>
-            <h3>University</h3>
-            <ul>
-              <li><a href="https://www.uni.lu/fhse-en/research-groups/ima/">IMA on uni.lu</a></li>
-              <li><a href="https://www.uni.lu/fhse-en/">Faculty (FHSE)</a></li>
-              <li><a href="https://www.uni.lu/fhse-en/study-programs/bachelor-en-enseignement-musical/">Bachelor en Enseignement Musical</a></li>
-              <li><a href="https://www.uni.lu/en/legal-notice/">Legal notice</a></li>
-            </ul>
-          </div>
         </div>
-        <div class="bottom"><span>© University of Luxembourg {new Date().getFullYear()}. All rights reserved.</span><a href="#main">To the top ↑</a></div>
+        <div class="bottom"><span>© {new Date().getFullYear()} IMA. All rights reserved.</span><a href="#main">To the top ↑</a></div>
       </div>
     </footer>
 
